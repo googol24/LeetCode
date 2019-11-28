@@ -28,11 +28,14 @@ public class LinkedListCycleII {
         node10.next = node11;
         node11.next = node9;
 
+        System.out.println(getCycleFirstNode(head1));
+        System.out.println(getCycleFirstNode(head2));
+
         System.out.println(checkCycle(head1));
         System.out.println(checkCycle(head2));
     }
 
-    public static ListNode checkCycle(ListNode head) {
+    public static ListNode getCycleFirstNode(ListNode head) {
         if (head == null || head.next == null) {
             return null;
         }
@@ -59,5 +62,25 @@ public class LinkedListCycleII {
         }
 
         return null;
+    }
+
+    public static boolean checkCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
